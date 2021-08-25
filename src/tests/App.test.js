@@ -5,13 +5,8 @@ import App from '../App';
 import renderWithRouter from './utils/renderWithRouter';
 
 describe('Testando componente App.js, Requesito 1', () => {
-  test('Testa se o topo tem 3 links de navegação', () => {
+  test('Verifica se o topo tem 3 links de navegação', () => {
     renderWithRouter(<App />);
-    // Acessar os elementos
-    // const num = 4;
-    // const allLink = screen.getAllByRole('link');
-    // expect(allLink).toHaveLength(num);
-    // acessar imagem utilizando alt
 
     const home = screen.getAllByRole('link')[0];
     const about = screen.getAllByRole('link')[1];
@@ -52,7 +47,6 @@ describe('Testando componente App.js, Requesito 1', () => {
   test('verifica se redireciona para a página Not Found ', () => {
     const { history } = renderWithRouter(<App />);
     history.push('/rotaNaoEncontrada');
-    // const notFoundText = screen.getByRole('heading', { level: 2, name: /not found/i });
     const notFoundText = screen.getByText(/not found/i);
     expect(notFoundText).toBeInTheDocument();
   });

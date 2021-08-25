@@ -4,7 +4,7 @@ import renderWithRouter from './utils/renderWithRouter';
 import { FavoritePokemons } from '../components';
 import pokemons from '../data';
 
-describe('Testando componente App.js, Requesito 1', () => {
+describe('Testando componente FavoritePokemons.js', () => {
   test('Verifica se aparece na tela o texto: No favorite pokemon found', () => {
     renderWithRouter(<FavoritePokemons />);
 
@@ -12,6 +12,7 @@ describe('Testando componente App.js, Requesito 1', () => {
 
     expect(notFoundText).toBeInTheDocument();
   });
+
   test('Verifique se é exibido todos os cards de pokémons favoritados', () => {
     const pikachuId = 25;
     const charmanderId = 4;
@@ -42,8 +43,8 @@ describe('Testando componente App.js, Requesito 1', () => {
 
     const moreDetails = screen.getAllByText(/more details/i);
 
-    const NINE = 9;
+    const NINE_POKEMONS = 9;
 
-    expect(moreDetails).toHaveLength(NINE);
+    expect(moreDetails).toHaveLength(NINE_POKEMONS);
   });
 });

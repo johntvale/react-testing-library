@@ -6,12 +6,13 @@ import App from '../App';
 import pokemons from '../data';
 
 describe('Testando componente Pokemon.js', () => {
+  const PIKACHU_SPRITE = 'Pikachu sprite';
   test('Verifica se aparece um card com informações de um pokemon"', () => {
     renderWithRouter(<App />);
     const pokemonName = screen.getByTestId('pokemon-name');
     const pokemonType = screen.getByTestId('pokemon-type');
     const pokemonWeigth = screen.getByTestId('pokemon-weight');
-    const pokemonImg = screen.getByAltText('Pikachu sprite');
+    const pokemonImg = screen.getByAltText(PIKACHU_SPRITE);
 
     expect(pokemonName).toHaveTextContent('Pikachu');
     expect(pokemonType).toHaveTextContent('Electric');
@@ -31,10 +32,10 @@ describe('Testando componente Pokemon.js', () => {
   test('Verifica a imagem do pokemon atual', () => {
     renderWithRouter(<App />);
     const { image } = pokemons[0]; // img source
-    const pokemonImg = screen.getByAltText('Pikachu sprite');
+    const pokemonImg = screen.getByAltText(PIKACHU_SPRITE);
 
     expect(pokemonImg).toBeInTheDocument();
-    expect(pokemonImg).toHaveAttribute('alt', 'Pikachu sprite');
+    expect(pokemonImg).toHaveAttribute('alt', PIKACHU_SPRITE);
     expect(pokemonImg).toHaveAttribute('src', image);
   });
 

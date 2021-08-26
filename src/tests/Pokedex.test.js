@@ -20,16 +20,6 @@ describe('Testando componente Pokedex.js', () => {
     expect(nextButton).toHaveTextContent(/Próximo pokémon/);
   });
 
-  test('testa se aparece outro pokemon quando clica no botão "Próximo Pokemon"', () => {
-    renderWithRouter(<App />);
-    const nextButton = screen.getByRole('button', { name: /próximo pokémon/i });
-    pokemons.map((pokemon) => {
-      userEvent.click(nextButton);
-      const foundPokemon = screen.getByTestId(POKEMON_NAME, { name: pokemon.name });
-      return expect(foundPokemon).toBeInTheDocument();
-    });
-  });
-
   test('Verifica se o próximo pokemon, após o último, é o primeiro da lista', () => {
     renderWithRouter(<App />);
     const FistAfterTheLast = (pokemons.length) + 1;
@@ -59,12 +49,18 @@ describe('Testando componente Pokedex.js', () => {
     expect(typeButtons).toHaveLength(DIFF_TYPES);
   });
 
-  test('Verifica se aparece um pokemon do filtro selecionado', () => {
+  test('Verifica se os pokemon mudam conforme o filtro selecionado', () => {
     renderWithRouter(<App />);
     const buttonDragon = screen.getByRole('button', { name: /dragon/i });
     userEvent.click(buttonDragon);
-    const foundPokemon = screen.getByAltText(/dragonair sprite/i);
-    expect(foundPokemon).toBeInTheDocument();
+    const dragonair = screen.getByAltText(/dragonair sprite/i);
+    expect(dragonair).toBeInTheDocument();
+    const buttonAll = screen.getByRole('button', { name: /All/i });
+
+    // retira o filtro, volta para o primeiro pokemon da lista
+    userEvent.click(buttonAll);
+    const pikachu = screen.getByAltText(/pikachu sprite/i);
+    expect(pikachu).toBeInTheDocument();
   });
 
   test('Verifica se o texto do botão corresponde ao tipo', () => {
@@ -77,7 +73,40 @@ describe('Testando componente Pokedex.js', () => {
 
   test('Verifica se existe um botão para limpar o filtro, botão All', () => {
     renderWithRouter(<App />);
+    const maxImg = 1;
     const buttonAll = screen.getByRole('button', { name: /all/i });
+    expect(buttonAll).toBeInTheDocument();
+
+    // máximo de um pokemon por tela
+    const foundPokemon = screen.getAllByRole('img');
+    expect(foundPokemon).toHaveLength(maxImg);
+  });
+
+  test('Verifica se botão All está sempre visível', () => {
+    renderWithRouter(<App />);
+    const buttonAll = screen.getByRole('button', { name: /all/i });
+    expect(buttonAll).toBeInTheDocument();
+
+    const buttonElectric = screen.getByRole('button', { name: /Electric/i });
+    userEvent.click(buttonElectric);
+    expect(buttonAll).toBeInTheDocument();
+    const buttonFire = screen.getByRole('button', { name: /Fire/i });
+    userEvent.click(buttonFire);
+    expect(buttonAll).toBeInTheDocument();
+    const buttonBug = screen.getByRole('button', { name: /Bug/i });
+    userEvent.click(buttonBug);
+    expect(buttonAll).toBeInTheDocument();
+    const buttonPoison = screen.getByRole('button', { name: /Poison/i });
+    userEvent.click(buttonPoison);
+    expect(buttonAll).toBeInTheDocument();
+    const buttonPsychic = screen.getByRole('button', { name: /Psychic/i });
+    userEvent.click(buttonPsychic);
+    expect(buttonAll).toBeInTheDocument();
+    const buttonNormal = screen.getByRole('button', { name: /Normal/i });
+    userEvent.click(buttonNormal);
+    expect(buttonAll).toBeInTheDocument();
+    const buttonDragon = screen.getByRole('button', { name: /Dragon/i });
+    userEvent.click(buttonDragon);
     expect(buttonAll).toBeInTheDocument();
   });
 });

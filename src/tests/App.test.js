@@ -4,6 +4,9 @@ import userEvent from '@testing-library/user-event';
 import App from '../App';
 import renderWithRouter from './utils/renderWithRouter';
 
+// Recebi ajuda do Thiago souza para auxiliar na resolução do projeto
+// Reposiório do Thiago Souza: https://github.com/tryber/sd-013-b-project-react-testing-library/tree/thiagoSouza-react-testing/src/tests
+
 describe('Testando componente App.js', () => {
   test('Verifica se o topo tem 3 links de navegação', () => {
     renderWithRouter(<App />);

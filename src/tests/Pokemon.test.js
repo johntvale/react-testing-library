@@ -5,6 +5,9 @@ import renderWithRouter from './utils/renderWithRouter';
 import App from '../App';
 import pokemons from '../data';
 
+// Consultei o repositório do Guilherme Gomes para conseguir localizar um erro. (Estava faltando escrever o teste 3)
+// Repositório do Guilherme Gomes https://github.com/tryber/sd-013-b-project-react-testing-library/tree/guilherme-gomes-project-react-testing-library/src/tests
+
 describe('Testando componente Pokemon.js', () => {
   const PIKACHU_SPRITE = 'Pikachu sprite';
   test('Verifica se aparece um card com informações de um pokemon"', () => {
